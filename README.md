@@ -1,2 +1,2 @@
 # pss
-programacion de software de sistemas
+programacion de software de sistemas semestre otoño 2022
