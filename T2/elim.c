@@ -8,33 +8,71 @@
 
 //modifica string original
 void eliminar_espacios(char *s) {
-  char *h = s + strlen (s);  //puntero hacia caracter evaluado, parte del fin del string hacia s
+  char *h = s + strlen(s)-1;  //puntero hacia caracter evaluado, parte del fin del string hacia s
   char *g = h-1;
-  char *f = g-1;
-  while(s < h){
-    if (*h==''){
-      if (h == s+strlen(s)){
+  char *f = g;
+  while(s <= h){
+    if (*h == ' '){
+      if (h == s+strlen(s)-1){
         g = h;
       }
-      while (*f == ''){
+      while (*f == ' '){
         f--;
+        if (f<= s){
+        s = g;
+        }
       }
-      if(f<s){
-        s = h+1;
-      }
-      if (f >= s && f!=(h-1)){
+      while (*f != ' '){
         *g = *f;
-        *f = '';
+        *f = ' ';
+        g--;
+        f--;
       }
     }
     h--;
-    g = h-1;
-    f = h-1;
   }
+  s = f;
 }
-
 
 //genera nuevo string modificado -> malloc
 char *eliminacion_espacios(const char *s) {
-  ...
+  char *a = s;
+  int l = strlen(s);
+  int e = 1;  //e=1 si el puntero esta en un espacio, e=0 si esta en un caracter != ' '
+  while (*a !=0){
+    if (e==1){
+      if (*a == ' '){
+        l--;
+      }
+      if(*a != ' '){
+        e=0;
+      }
+    }
+    if (e==0){
+      if (*a == ' '){
+        e=1;
+      }
+    }
+    a++;
+  }
+  char *p = (char*) malloc(l);
+  char *r = p;
+  char *b = s;
+  e = 1;  //el valor de e inicia en 1, para que asi, si s parte con un espacio, este tambien se considere incorrecto
+  while (*b !=0){
+    if (e==1){
+      //if (*b == ' ') no se necesita especificar porque no hace nada, solo revisa el siguiente caracter en s, o sea b++
+      if(*b != ' '){
+        *p = *s;
+      }
+    }
+    if (e==0){
+      if (*b == ' '){
+        *p = *s;
+        e=1;
+      }
+    }
+    b++;
+  }
+  return p;
 }
