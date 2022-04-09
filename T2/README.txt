@@ -16,20 +16,6 @@ Para buscar un texto: tecla / seguido del texto (/...texto...)
 
 -----------------------------------------------
 
-Novedades
-
-+ Ahora el test de prueba le da 5 oportunidades para satisfacer el
-  requerimiento de eficiencia.
-
-+ Puede comparar los tiempos de su funcionar eliminar_espacios con la
-  del profesor con estos comandos:
-
-  % make elim.bin
-  % ./elim.bin bench-elim
-  % ./prof.ref bench-elim
-
------------------------------------------------
-
 Ud. debe crear el archivo elim.c y programar ahí la función buscar.
 Ya hay una plantilla para elim.c en elim.c.plantilla.
 

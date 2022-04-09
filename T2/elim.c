@@ -36,14 +36,14 @@ void eliminar_espacios(char *s) {
 //genera nuevo string modificado -> malloc
 char *eliminacion_espacios(const char *s) {
   char *a=(char *) s; //puntero lector
-  int l=strlen(s);
+  int l=strlen(s)+1;
   int e=0;  //e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
   while (*a !=0){
     if (e==1){
       if (*a == ' '){
         l--;
       }
-      else if(*a != ' '){
+      else{
         e=0;
       }
     }
@@ -58,13 +58,11 @@ char *eliminacion_espacios(const char *s) {
   char *r=p;
   e=0;  //e=1 si el puntero lector (s) quedo en un espacio, e=0 si quedo en un caracter != ' '
   while (*s !=0){
-    if (e==1){
+    if (e==1 && *s != ' '){
       //if (*b == ' ') no se necesita especificar porque no hace nada, solo revisa el siguiente caracter en s, o sea s++
-      if(*s != ' '){
-        *r=*s;
-        r++;
-        e=0;
-      }
+      *r=*s;
+      r++;
+      e=0;
     }
     else if (e==0){
       *r=*s;
@@ -75,5 +73,7 @@ char *eliminacion_espacios(const char *s) {
     }
     s++;
   }
+  r++;
+  *r=0;
   return p;
 }
