@@ -9,10 +9,70 @@
 //modifica string original
 void eliminar_espacios(char *s) {
   char *h=s;
-  char *g=h;  //puntero lector
-  int e=0;  //e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
-  while(*g!=0){
-    if(e==0){
+  char *g=h+1;  //puntero lector
+  //int e=0;  e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
+  while(*h!=0){
+    if (*h==' '){
+      g=h+1;
+      while (*g==' '){
+        g++;
+        while (*g!=' '){
+          h++;
+          *h=*g;
+          *g=' ';
+          g++;
+        }
+      }
+      if(*g==0){
+        *h=0;
+      }
+    }
+    while(*h!=' ' &&h!=0){
+      g++;
+      h++;
+    }
+  }
+  h++;
+}
+
+//genera nuevo string modificado -> malloc
+char *eliminacion_espacios(const char *s) {
+  char *a=(char*)s;
+  char *b=(char*)s;
+  int l=strlen(s);
+  while(*a!=0){
+    if(*a==' '){
+      while(*b==' '){
+        l--;
+      }
+    }
+    a++;
+  }
+  char *p=malloc(l+1);
+  char *r=p;
+  //char *y=(char*)s+1;
+  while(*s!=0){
+    if(*s==' '){
+      while(*s==' '){
+        s++;
+      }
+    }
+    while(*s!=' '){
+      *r=*s;
+      s++;
+      r++;
+    }
+  }
+  *r=0;
+  return p;
+}
+
+
+
+
+
+
+    /*if(e==0){
       *h=*g;
       h++;
       if(*g == ' '){
@@ -29,14 +89,11 @@ void eliminar_espacios(char *s) {
     g++;
     if(*g==0){
       *h=0;
-    }
-  }
-}
+    }*/
 
-//genera nuevo string modificado -> malloc
-char *eliminacion_espacios(const char *s) {
-  char *a=(char *) s; //puntero lector
-  int l=strlen(s)+1;
+
+  /*char *a=(char *) s; //puntero lector
+  int l=strlen(s);
   int e=0;  //e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
   while (*a!=0){
     if (e==0){
@@ -55,8 +112,7 @@ char *eliminacion_espacios(const char *s) {
 
     a++;
   }
-  char *p=malloc(l+1);
-  char *r=p;
+
   e=0;  //e=1 si el puntero lector (s) quedo en un espacio, e=0 si quedo en un caracter != ' '
   while (*s!=0){
     if (e==1){
@@ -65,7 +121,7 @@ char *eliminacion_espacios(const char *s) {
         r++;
         e=0;
       }
-    } //si e==1 y s== ' ' no se necesita especificar porque no hace nada, solo revisa el siguiente caracter en s, o sea s++
+    } //si e==1 y s== ' ' no se hace nada, solo revisa el siguiente caracter en s, o sea s++
     else{ //if e==0
       *r=*s;
       r++;
@@ -75,5 +131,5 @@ char *eliminacion_espacios(const char *s) {
     }
     s++;
   }
-  return p;
-}
+  *r=0;
+  return p;*/
