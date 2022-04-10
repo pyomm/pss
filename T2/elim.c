@@ -47,28 +47,37 @@ char *eliminacion_espacios(const char *s) {
         a++;
       }
     }
-    if (*a!=0){
+    else if(*a!=0){
       a++;
     }
   }
   char *r=malloc(l+1);
   char *p=r;
   while(*s!=0){
-    if(s==0){
-      *r=0;
-    }
     if(*s==' '){  //un primer espacio en s (no es superfluo)
       *r=*s;  //se agrega a p
       s++;
       r++;
+      if(*s==0){
+        *r=*s;
+      }
       while(*s==' '){ //espacios superfluos
         s++;  //se recorre sin agregar
+        if(*s==0){
+          *r=*s;
+        }
       }
     }
-    else{ //s es caracter y r no esta terminado
-      *r=*s;
-      s++;
-      r++;
+    else{
+      while(*s!=' '){
+        *r=*s;
+        if(*r==0){
+          r--;
+          s--;
+        }
+        r++;
+        s++;
+      }
     }
   }
   return p;
