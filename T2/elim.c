@@ -41,15 +41,13 @@ char *eliminacion_espacios(const char *s) {
   int l=strlen(s);
   while(*a!=0 && l>0){
     if(*a==' '){
-      if(*a!=0){
-        a++;
-      }
+      a++;
       while(*a==' '){
         l--;
         a++;
       }
     }
-    else if(*a!=0){
+    if (*a!=0){
       a++;
     }
   }
