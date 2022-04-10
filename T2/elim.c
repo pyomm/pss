@@ -13,123 +13,65 @@ void eliminar_espacios(char *s) {
   //int e=0;  e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
   while(*h!=0){
     if (*h==' '){
-      g=h+1;
-      while (*g==' '){
+      while (*g==' ' && *h==' '){
         g++;
-        while (*g!=' '){
+        while (*g!=' ' && *g!=0){
           h++;
           *h=*g;
           *g=' ';
           g++;
         }
-      }
-      if(*g==0){
-        *h=0;
+        if (*g==0){
+          h++;
+          *h=0;
+          h--;
+        }
       }
     }
-    while(*h!=' ' &&h!=0){
+    h++;
+    if (*g!=' '){
       g++;
-      h++;
     }
   }
-  h++;
 }
 
 //genera nuevo string modificado -> malloc
 char *eliminacion_espacios(const char *s) {
   char *a=(char*)s;
-  char *b=(char*)s;
   int l=strlen(s);
-  while(*a!=0){
+  while(*a!=0 && l>0){
     if(*a==' '){
-      while(*b==' '){
+      if(*a!=0){
+        a++;
+      }
+      while(*a==' '){
         l--;
+        a++;
       }
     }
-    a++;
+    else if(*a!=0){
+      a++;
+    }
   }
-  char *p=malloc(l+1);
-  char *r=p;
-  //char *y=(char*)s+1;
+  char *r=malloc(l+1);
+  char *p=r;
   while(*s!=0){
-    if(*s==' '){
-      while(*s==' '){
-        s++;
+    if(s==0){
+      *r=0;
+    }
+    if(*s==' '){  //un primer espacio en s (no es superfluo)
+      *r=*s;  //se agrega a p
+      s++;
+      r++;
+      while(*s==' '){ //espacios superfluos
+        s++;  //se recorre sin agregar
       }
     }
-    while(*s!=' '){
+    else{ //s es caracter y r no esta terminado
       *r=*s;
       s++;
       r++;
     }
   }
-  *r=0;
   return p;
 }
-
-
-
-
-
-
-    /*if(e==0){
-      *h=*g;
-      h++;
-      if(*g == ' '){
-        e=1;
-      }
-    }
-    else{ //if e==1
-      if(*g!=' '){
-        *h=*g;
-        h++;
-        e=0;
-      }
-    }
-    g++;
-    if(*g==0){
-      *h=0;
-    }*/
-
-
-  /*char *a=(char *) s; //puntero lector
-  int l=strlen(s);
-  int e=0;  //e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
-  while (*a!=0){
-    if (e==0){
-      if (*a==' '){
-        e=1;
-      }
-    }
-    else{ //if e==1
-      if (*a==' '){
-        l--;
-      }
-      else{
-        e=0;
-      }
-    }
-
-    a++;
-  }
-
-  e=0;  //e=1 si el puntero lector (s) quedo en un espacio, e=0 si quedo en un caracter != ' '
-  while (*s!=0){
-    if (e==1){
-      if (*s!=' '){
-        *r=*s;
-        r++;
-        e=0;
-      }
-    } //si e==1 y s== ' ' no se hace nada, solo revisa el siguiente caracter en s, o sea s++
-    else{ //if e==0
-      *r=*s;
-      r++;
-      if (*s==' '){
-        e=1;
-      }
-    }
-    s++;
-  }
-  *r=0;
-  return p;*/
