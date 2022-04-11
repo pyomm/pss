@@ -8,9 +8,8 @@
 
 //modifica string original
 void eliminar_espacios(char *s) {
-  char *h=s;
+  char *h=s;  //puntero escritor sin modificar s original hacia el primer caracter
   char *g=h+1;  //puntero lector
-  //int e=0;  e=1 si el puntero lector quedo en un espacio, e=0 si quedo en un caracter != ' '
   while(*h!=0){
     if (*h==' '){
       while (*g==' ' && *h==' '){
@@ -29,7 +28,7 @@ void eliminar_espacios(char *s) {
       }
     }
     h++;
-    if (*g!=' '){
+    if (*g!=' ' && *g!=0){
       g++;
     }
   }
@@ -39,7 +38,7 @@ void eliminar_espacios(char *s) {
 char *eliminacion_espacios(const char *s) {
   char *a=(char*)s;
   int l=strlen(s);
-  while(*a!=0 && l>0){
+  while(*a!=0){
     if(*a==' '){
       a++;
       while(*a==' '){
@@ -47,12 +46,12 @@ char *eliminacion_espacios(const char *s) {
         a++;
       }
     }
-    else if(*a!=0){
+    else{
       a++;
     }
   }
-  char *r=malloc(l+1);
-  char *p=r;
+  char *r=malloc(l+1);  //+1 para el espacio ocupado por 0
+  char *p=r;  //puntero al inicio de r para retornarlo
   while(*s!=0){
     if(*s==' '){  //un primer espacio en s (no es superfluo)
       *r=*s;  //se agrega a p
@@ -69,14 +68,13 @@ char *eliminacion_espacios(const char *s) {
       }
     }
     else{
-      while(*s!=' '){
+      while(*s!=' ' && *s!=0){
         *r=*s;
-        if(*r==0){
-          r--;
-          s--;
-        }
         r++;
         s++;
+        if(*s==0){
+          *r=*s;
+        }
       }
     }
   }
