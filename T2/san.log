@@ -1,18 +1,18 @@
 =================================================================
-==1633==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60600001feb2 at pc 0x55ecec790e0e bp 0x7ffece898070 sp 0x7ffece898068
+==880==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60600001feb2 at pc 0x564b15ed7915 bp 0x7ffd598a01f0 sp 0x7ffd598a01e8
 WRITE of size 1 at 0x60600001feb2 thread T0
-    #0 0x55ecec790e0d in tests_lentos /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:173
-    #1 0x55ecec79115a in main /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:212
-    #2 0x7f46fc547d09 in __libc_start_main ../csu/libc-start.c:308
-    #3 0x55ecec78e2c9 in _start (/mnt/c/users/victo/documentos/pss/pss/t2/elim.bin-san+0x72c9)
+    #0 0x564b15ed7914 in tests_lentos /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:173
+    #1 0x564b15ed7c61 in main /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:212
+    #2 0x7f5e17b75d09 in __libc_start_main ../csu/libc-start.c:308
+    #3 0x564b15ed52c9 in _start (/mnt/c/users/victo/documentos/pss/pss/t2/elim.bin-san+0x62c9)
 
 0x60600001feb2 is located 0 bytes to the right of 50-byte region [0x60600001fe80,0x60600001feb2)
 allocated by thread T0 here:
-    #0 0x7f46fd0f9e8f in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x55ecec78ea44 in eliminacion_espacios /mnt/c/users/victo/documentos/pss/pss/t2/elim.c:54
-    #2 0x55ecec790b05 in tests_lentos /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:151
-    #3 0x55ecec79115a in main /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:212
-    #4 0x7f46fc547d09 in __libc_start_main ../csu/libc-start.c:308
+    #0 0x7f5e18727e8f in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x564b15ed58af in eliminacion_espacios /mnt/c/users/victo/documentos/pss/pss/t2/elim.c:61
+    #2 0x564b15ed760c in tests_lentos /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:151
+    #3 0x564b15ed7c61 in main /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:212
+    #4 0x7f5e17b75d09 in __libc_start_main ../csu/libc-start.c:308
 
 SUMMARY: AddressSanitizer: heap-buffer-overflow /mnt/c/users/victo/documentos/pss/pss/t2/test-elim.c:173 in tests_lentos
 Shadow bytes around the buggy address:
@@ -47,4 +47,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Left alloca redzone:     ca
   Right alloca redzone:    cb
   Shadow gap:              cc
-==1633==ABORTING
+==880==ABORTING

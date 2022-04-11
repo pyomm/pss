@@ -9,9 +9,29 @@
 //modifica string original
 void eliminar_espacios(char *s) {
   char *h=s;  //puntero escritor sin modificar s original hacia el primer caracter
-  char *g=h+1;  //puntero lector
+  char *g=h;  //puntero lector
   while(*h!=0){
-    if (*h==' '){
+    if(*h==' '){
+      h++;
+      while (*g==' '){
+        g++;
+      }
+    }
+    else if(*h!=0){
+        h++;
+        g++;
+    }
+    while(*g!=' ' && h!=g){
+      *h=*g;
+      *g=' ';
+      if(*h!=0){
+        h++;
+        g++;
+      }
+    }
+  }
+}
+    /*if (*h==' '){
       while (*g==' ' && *h==' '){
         g++;
         while (*g!=' ' && *g!=0){
@@ -31,52 +51,14 @@ void eliminar_espacios(char *s) {
     if (*g!=' ' && *g!=0){
       g++;
     }
-  }
-}
+  }*/
 
 //genera nuevo string modificado -> malloc
 char *eliminacion_espacios(const char *s) {
-  char *a=(char*)s;
-  int l=strlen(s);
-  while(*a!=0){
-    if(*a==' '){
-      a++;
-      while(*a==' '){
-        l--;
-        a++;
-      }
-    }
-    else{
-      a++;
-    }
-  }
-  char *r=malloc(l+1);  //+1 para el espacio ocupado por 0
-  char *p=r;  //puntero al inicio de r para retornarlo
-  while(*s!=0){
-    if(*s==' '){  //un primer espacio en s (no es superfluo)
-      *r=*s;  //se agrega a p
-      s++;
-      r++;
-      if(*s==0){
-        *r=*s;
-      }
-      while(*s==' '){ //espacios superfluos
-        s++;  //se recorre sin agregar
-        if(*s==0){
-          *r=*s;
-        }
-      }
-    }
-    else{
-      while(*s!=' ' && *s!=0){
-        *r=*s;
-        r++;
-        s++;
-        if(*s==0){
-          *r=*s;
-        }
-      }
-    }
-  }
-  return p;
+  char m[strlen(s)+1];  //string auxiliar, de largo s
+  strcpy(m, s); //string auxiliar=s
+  eliminar_espacios(m); //aplicacion funcion que muta str en el auxiliar
+  char* r= malloc(strlen(m)+1);
+  strcpy(r, m);
+  return r;
 }
