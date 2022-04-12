@@ -8,36 +8,37 @@
 
 //modifica string original
 void eliminar_espacios(char *s) {
-  char *h=s;  //puntero escritor sin modificar s original hacia el primer caracter
-  char *g=s;  //puntero lector
-  while(*h!=0){
-    if(*h==' '){
-      h++;
-      while (*g==' '){
-        g++;
+  char *h=s;    //puntero hacia caracter por cambiar
+  char *g=s;    //puntero hacia caracter a copiar en h
+  while(*h!=0) {
+      if (*g != ' ' && h != g) {    //si g es a copiar en h
+          *h = *g;
+          *g = ' ';     //g=' ' para no repetir el caracter ya pegado en h
+                        // (se obtiene una modificacion equivalente a cambio de sitio del caracter *g en vez de una copia de este)
+          if (*h != 0) {    //condicion para no salirse de s con el puntero g
+              h++;
+              g++;
+          }
       }
-    }
-    else if(*h!=0){
-      h++;
-      g++;
-    }
-    while(*g!=' ' && h!=g){
-      *h=*g;
-      *g=' ';
-      if(*h!=0){
-        h++;
-        g++;
+      else if (*h == ' ') {
+          h++;    //se avanza h para dejar el espacio no superfluo
+          while (*g == ' ') {    //se obvian los espacios superfluos para el string resultante
+              g++;
+          }
       }
-    }
+      else if (*h != 0) {    //avanzar en los caracteres=letras
+          h++;
+          g++;
+      }
   }
 }
 
 //genera nuevo string modificado -> malloc
 char *eliminacion_espacios(const char *s) {
-  char m[strlen(s)+1];  //string auxiliar, de largo s
-  strcpy(m, s); //string auxiliar=s
-  eliminar_espacios(m); //aplicacion funcion que muta str en el auxiliar
-  char* r= malloc(strlen(m)+1);
-  strcpy(r, m);
+  char m[strlen(s)+1];    //string auxiliar, de largo s igual a original
+  strcpy(m, s);    //string auxiliar=s
+  eliminar_espacios(m);    //aplicacion funcion eliminar_espacios a str auxiliar
+  char* r= malloc(strlen(m)+1);    //malloc de string obtenido tras eliminar_espacios +1(para el 0 al final de cada str)
+  strcpy(r, m);    //copiar string modificado al espacio de malloc
   return r;
 }
