@@ -1,0 +1,46 @@
+Sistema operativo utilizado
+Linux LAPTOP-Q2AEIA79 5.10.60.1-microsoft-standard-WSL2 #1 SMP Wed Aug 25 23:20:18 UTC 2021 x86_64 GNU/Linux
+==== run-san ====
+gcc -g -DSAN=1 -fsanitize=address -fsanitize=undefined -DSANITIZE -Wall -Werror -std=c18  elim.c test-elim.c elim.h -lm -o elim.bin-san
+./elim.bin-san
+Tests de eliminar_espacios
+Tests de eliminacion_espacios
+Tests largos
+13508 KBytes usados
+20716 KBytes usados
+Tiempo de cpu usado por su version: 55 milisegundos
+Aprobado
+Felicitaciones, todos los tests funcionan correctamente
+
+Verificando que no pide mas memoria de la necesaria
+Test aprobado
+==== run-g ====
+gcc -g -Wall -Werror -std=c18  elim.c test-elim.c elim.h -lm -o elim.bin-g
+./elim.bin-g
+Tests de eliminar_espacios
+Tests de eliminacion_espacios
+Tests largos
+3196 KBytes usados
+3196 KBytes usados
+Tiempo de cpu usado por su version: 42 milisegundos
+Aprobado
+Felicitaciones, todos los tests funcionan correctamente
+==== run ====
+gcc -O -DOPT=1 -Wall -Werror -std=c18  elim.c test-elim.c elim.h -lm -o elim.bin
+Midiendo cuanto demora la solucion del profesor
+rm -f tiempo-ref.txt
+chmod +x prof.ref
+./prof.ref ref > /dev/null
+Tiempo de referencia =  6051
+Verificando y comparando con su solucion
+./elim.bin 6051
+Tests de eliminar_espacios
+Tests de eliminacion_espacios
+Tests largos
+3276 KBytes usados
+4016 KBytes usados
+Tiempo de cpu usado por su version: 4775 milisegundos
+Tiempo de cpu usado por la versión del profesor: 6051 milisegundos
+Porcentaje de sobrecosto: -21 %
+Aprobado
+Felicitaciones, todos los tests funcionan correctamente

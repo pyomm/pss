@@ -26,7 +26,7 @@ void eliminar_espacios(char *s) {
               g++;
           }
       }
-      else if (*h != 0) {    //avanzar en los caracteres=letras
+      else if (*h != 0) {    //avanzar en los caracteres=letras si h==g (no ha habido espacios superfluos)
           h++;
           g++;
       }
