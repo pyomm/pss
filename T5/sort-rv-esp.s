@@ -41,12 +41,31 @@ sort:                   # void sort(uint nums[], int n) { // registros a0, a1
     # El valor de p esta temporalmente en el registro t0
     # No puede hacer mas trabajo que la comparacion (no puede usar ret)
 
-    lw      a0,0(t0)    #     int rc= strcmp(p[0], p[1]); // registro t1
-    lw      a1,4(t0)
-    sw      t0,56(sp)   # resguardar p en memoria antes de llamar a strcmp
-    call    strcmp      #     // valor retornado queda en registro a0
-                        #     // p ya no esta en el registro t0
-    mv      t1,a0       #     // Dejar resultado de la comparacion en t1
+    mv      t1,zero     # el valor inicial de t1 es 0, strings ordenados
+    lw      a0,0(t0)    # a0 = string apuntado por p[0]
+    lw      a1,4(t0)    # a1 = el sting apuntado por p[1]
+    li      a6,0        # a6 = 0 = fin del string
+    li      a7,32       # a7 = 32 = valor entero de ' '
+
+    .space0:    # se busca el siguiente espacio en a0
+    lbu     a2,0(a0)    # a2 = caracter apuntado por a0 (para leer el string por caracteres)
+    beq     a2,a6,.inorder  # se termina de leer a0 sin encontrarse mas espacios que en a1
+    addi    a0,a0,1
+    bne     a2,a7,.space0
+
+    .space1:    #
+    lbu     a2,0(a1)    # a2 = caracter apuntado por a1 (para leer el string por caracteres)
+    beq     a2,a6,.notinorder   # se termina de leer a1 habiendo espacios no igualados en a0 aun
+    addi    a1,a1,1
+    bne     a2,a7,.space1
+
+    addi    a1,a1,1     # si .space2 termino sin ir a .notinorder, se avanza el puntero al caracter despues del espacio en a1
+    j       .space0     # y se empieza en .space1 nuevamente
+
+    .notinorder:    # si los strings estaban desordenados, t1 debe quedar mayor a 0
+    mv      t1,a7   # reemplazamos con a7 porque si, pero cualquier numero >0 sirve
+
+    .inorder:       # si los strings estaban ordenados, no se modifica t1, se salta .notinorder, y resulta t1=0
 
     # En el registro t1 debe quedar la conclusion de la comparacion:
     # si t1<=0 p[0] y p[1] estan en orden y no se intercambiaran.

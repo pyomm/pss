@@ -16,7 +16,7 @@ void sort(char **noms, int n) {
         if (*s1==' '){
             while (*s2!=' ') {
                 s2++;
-                if (*s2 == 0) { //se terminó de leer p[1] habiendo espacios no igualados en p[0]
+                if (*s2 == 0) { //se terminó de leer p[1] habiendo espacios no igualados en p[0] aun
                     rc=1;
                 }
             }
