@@ -47,13 +47,13 @@ sort:                   # void sort(uint nums[], int n) { // registros a0, a1
     li      a6,0        # a6 = 0 = fin del string
     li      a7,32       # a7 = 32 = valor entero de ' '
 
-    .space0:    # se busca el siguiente espacio en a0
+.space0:    # se busca el siguiente espacio en a0
     lbu     a2,0(a0)    # a2 = caracter apuntado por a0 (para leer el string por caracteres)
     beq     a2,a6,.inorder  # se termina de leer a0 sin encontrarse mas espacios que en a1
     addi    a0,a0,1
     bne     a2,a7,.space0
 
-    .space1:    #
+.space1:    # se busca el siguiente espacio en a1
     lbu     a2,0(a1)    # a2 = caracter apuntado por a1 (para leer el string por caracteres)
     beq     a2,a6,.notinorder   # se termina de leer a1 habiendo espacios no igualados en a0 aun
     addi    a1,a1,1
@@ -62,10 +62,10 @@ sort:                   # void sort(uint nums[], int n) { // registros a0, a1
     addi    a1,a1,1     # si .space2 termino sin ir a .notinorder, se avanza el puntero al caracter despues del espacio en a1
     j       .space0     # y se empieza en .space1 nuevamente
 
-    .notinorder:    # si los strings estaban desordenados, t1 debe quedar mayor a 0
+.notinorder:    # si los strings estaban desordenados, t1 debe quedar mayor a 0
     mv      t1,a7   # reemplazamos con a7 porque si, pero cualquier numero >0 sirve
 
-    .inorder:       # si los strings estaban ordenados, no se modifica t1, se salta .notinorder, y resulta t1=0
+.inorder:       # si los strings estaban ordenados, no se modifica t1, se salta .notinorder, y resulta t1=0
 
     # En el registro t1 debe quedar la conclusion de la comparacion:
     # si t1<=0 p[0] y p[1] estan en orden y no se intercambiaran.
