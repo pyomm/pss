@@ -8,12 +8,6 @@
 #include <fcntl.h>
 #include <strings.h>
 
-/**
- * A subconjunto de B:
- * A archivo regular -> B archivo regular de mismo tamaño y contenido
- * A directorio -> B directorio tq para toda entrada A/x hay B/x, y A/x subconjunto B/x
- */
-
 void cmpdir(char *nom1, char *nom2) {
     struct stat st_nom1;
     struct stat st_nom2;
@@ -30,7 +24,7 @@ void cmpdir(char *nom1, char *nom2) {
         printf("%s si existe, %s no existe\n", nom1, nom2);
         exit(0);
     }
-    if (S_ISREG(st_nom1.st_mode) && S_ISREG(st_nom2.st_mode)) {
+    if (S_ISREG(st_nom1.st_mode) && S_ISREG(st_nom2.st_mode)) { //si ambos son archivos regulares
         if (st_nom1.st_size != st_nom2.st_size) {
             printf("%s y %s son de distinto tamanno\n", nom1, nom2);
             exit(0);
@@ -39,11 +33,11 @@ void cmpdir(char *nom1, char *nom2) {
         char buf2[st_nom2.st_size + 1];
         int a = open(nom1, O_RDONLY);
         int b = open(nom2, O_RDONLY);
-        if (a ==-1) {
+        if (a==-1) {    //el archivo no cuenta con los permisos requeridos
             perror(nom1);
             exit(1);
         }
-        if (b == -1) {
+        if (b==-1) {    //el archivo no cuenta con los permisos requeridos
             perror(nom2);
             exit(1);
         }
@@ -56,15 +50,15 @@ void cmpdir(char *nom1, char *nom2) {
         close(a);
         close(b);
     }
-    else if (S_ISDIR(st_nom1.st_mode)) {
-        if (S_ISDIR(st_nom2.st_mode)) {
+    else if (S_ISDIR(st_nom1.st_mode)) {    //si nom1 es directorio
+        if (S_ISDIR(st_nom2.st_mode)) {     //si nom2 tambien directorio
             DIR *dir1 = opendir(nom1);
             DIR *dir2 = opendir(nom2);
-            if (dir1 == NULL) {
+            if (dir1 == NULL) {     //el directorio no cuenta con los permisos requeridos
                 perror(nom1);
                 exit(1);
             }
-            if (dir2 == NULL) {
+            if (dir2 == NULL) {     //el directorio no cuenta con los permisos requeridos
                 perror(nom2);
                 exit(1);
             }
@@ -82,7 +76,7 @@ void cmpdir(char *nom1, char *nom2) {
                 strcpy(nom_arch2, nom2);
                 strcat(nom_arch2, "/");
                 strcat(nom_arch2, entry->d_name);
-                cmpdir(nom_arch1, nom_arch2);
+                cmpdir(nom_arch1, nom_arch2);       //cmpdir con path a subdirectorios o archivos en nom1 y nom2
                 free(nom_arch1);
                 free(nom_arch2);
             }
@@ -106,6 +100,6 @@ int main(int argc, char *argv[]) {
         exit(2);
     }
     cmpdir(argv[1],argv[2]);
-    printf("Es subconjunto\n");
+    printf("Es subconjunto\n");     //se alcanza solamente si cmpdir no se detuvo en algun error (con algun exit)
     return 0;
 }

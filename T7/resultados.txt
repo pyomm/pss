@@ -1,0 +1,152 @@
+Sistema operativo utilizado
+Linux LAPTOP-Q2AEIA79 5.10.60.1-microsoft-standard-WSL2 #1 SMP Wed Aug 25 23:20:18 UTC 2021 x86_64 GNU/Linux
+==== run-san ====
+gcc -g -DSAN=1 -fsanitize=address -fsanitize=undefined -DSANITIZE -Wall -Werror -std=c18  fav.c test-fav.c fav.h -lm -lpthread -o fav.bin-san
+./fav.bin-san
+Test 1: Un ejemplo pequeño con nlanz=2 sum=7 rep=1000000
+Calculando en paralelo
+Semilla inicial para proceso 383 es 1989328368
+Semilla inicial para proceso 382 es 192620982
+Semilla inicial para proceso 384 es 856214656
+Semilla inicial para proceso 385 es 1699882944
+Semilla inicial para proceso 386 es 1325585714
+Semilla inicial para proceso 387 es 59387132
+Semilla inicial para proceso 388 es 1407065308
+Semilla inicial para proceso 389 es 108245882
+Casos favorables con 125000 repeticiones para proceso 384=21080
+Casos favorables con 125000 repeticiones para proceso 386=20781
+Casos favorables con 125000 repeticiones para proceso 387=20971
+Casos favorables con 125000 repeticiones para proceso 385=20885
+Casos favorables con 125000 repeticiones para proceso 382=20735
+Casos favorables con 125000 repeticiones para proceso 389=20770
+Casos favorables con 125000 repeticiones para proceso 388=20964
+Casos favorables con 125000 repeticiones para proceso 383=20939
+fav=167125  pbb=0.167125  delta=0.000458
+Test 1 aprobado
+
+--------------------------------------------------
+
+Test 2: Un ejemplo grande con nlanz=10 sum=30 rep=10000000
+Precalentando secuencialmente
+Semilla inicial para proceso 381 es 108245882
+Casos favorables con 20000 repeticiones para proceso 381=988
+fav=988 pbb=0.049400
+Calculando secuencialmente con rep=2000000
+Semilla inicial para proceso 381 es 108245882
+Casos favorables con 2000000 repeticiones para proceso 381=97243
+Tiempo= 440, fav=97243 pbb=0.048621
+
+-----
+Calculando en paralelo con rep=2000000, intento 1
+Semilla inicial para proceso 398 es 689478310
+Semilla inicial para proceso 399 es 959481024
+Semilla inicial para proceso 400 es 1973899752
+Semilla inicial para proceso 401 es 1081605396
+Casos favorables con 500000 repeticiones para proceso 399=24368
+Casos favorables con 500000 repeticiones para proceso 400=24202
+Casos favorables con 500000 repeticiones para proceso 398=24260
+Casos favorables con 500000 repeticiones para proceso 401=24323
+Tiempo= 192  speedup= 2.29167  fav=97153  pbb=0.048577  delta=0.000926
+Test 2 aprobado
+
+Felicitaciones: su tarea funciona
+==== run-g ====
+gcc -g -Wall -Werror -std=c18  fav.c test-fav.c fav.h -lm -lpthread -o fav.bin-g
+./fav.bin-g
+Test 1: Un ejemplo pequeño con nlanz=2 sum=7 rep=1000000
+Calculando en paralelo
+Semilla inicial para proceso 422 es 1021194218
+Semilla inicial para proceso 423 es 1840129057
+Semilla inicial para proceso 424 es 1118710813
+Semilla inicial para proceso 425 es 1861053722
+Semilla inicial para proceso 426 es 2116709326
+Semilla inicial para proceso 427 es 794859254
+Semilla inicial para proceso 428 es 916644606
+Semilla inicial para proceso 429 es 1725979825
+Casos favorables con 125000 repeticiones para proceso 423=21018
+Casos favorables con 125000 repeticiones para proceso 426=20914
+Casos favorables con 125000 repeticiones para proceso 424=21094
+Casos favorables con 125000 repeticiones para proceso 422=20868
+Casos favorables con 125000 repeticiones para proceso 429=20861
+Casos favorables con 125000 repeticiones para proceso 427=20827
+Casos favorables con 125000 repeticiones para proceso 425=21030
+Casos favorables con 125000 repeticiones para proceso 428=20838
+fav=167450  pbb=0.167450  delta=0.000783
+Test 1 aprobado
+
+--------------------------------------------------
+
+Test 2: Un ejemplo grande con nlanz=10 sum=30 rep=10000000
+Precalentando secuencialmente
+Semilla inicial para proceso 421 es 1725979825
+Casos favorables con 200000 repeticiones para proceso 421=9946
+fav=9946 pbb=0.049730
+Calculando secuencialmente con rep=20000000
+Semilla inicial para proceso 421 es 1725979825
+Casos favorables con 20000000 repeticiones para proceso 421=968820
+Tiempo= 2816, fav=968820 pbb=0.048441
+
+-----
+Calculando en paralelo con rep=20000000, intento 1
+Semilla inicial para proceso 431 es 720125449
+Semilla inicial para proceso 432 es 977262548
+Semilla inicial para proceso 430 es 822982809
+Semilla inicial para proceso 433 es 350743786
+Casos favorables con 5000000 repeticiones para proceso 432=241601
+Casos favorables con 5000000 repeticiones para proceso 431=242346
+Casos favorables con 5000000 repeticiones para proceso 430=241381
+Casos favorables con 5000000 repeticiones para proceso 433=241424
+Tiempo= 1017  speedup= 2.76893  fav=966752  pbb=0.048338  delta=0.002135
+Test 2 aprobado
+
+Felicitaciones: su tarea funciona
+==== run ====
+gcc -O -DOPT=1 -Wall -Werror -std=c18  fav.c test-fav.c fav.h -lm -lpthread -o fav.bin
+./fav.bin
+Test 1: Un ejemplo pequeño con nlanz=2 sum=7 rep=1000000
+Calculando en paralelo
+Semilla inicial para proceso 449 es 259393808
+Semilla inicial para proceso 450 es 506475913
+Semilla inicial para proceso 451 es 509341451
+Semilla inicial para proceso 452 es 1652235267
+Semilla inicial para proceso 453 es 1145697802
+Semilla inicial para proceso 454 es 1355290788
+Semilla inicial para proceso 456 es 130172381
+Semilla inicial para proceso 455 es 752189911
+Casos favorables con 125000 repeticiones para proceso 449=20609
+Casos favorables con 125000 repeticiones para proceso 450=20712
+Casos favorables con 125000 repeticiones para proceso 451=20747
+Casos favorables con 125000 repeticiones para proceso 456=20986
+Casos favorables con 125000 repeticiones para proceso 452=20610
+Casos favorables con 125000 repeticiones para proceso 453=20928
+Casos favorables con 125000 repeticiones para proceso 454=20702
+Casos favorables con 125000 repeticiones para proceso 455=21029
+fav=166323  pbb=0.166323  delta=0.000344
+Test 1 aprobado
+
+--------------------------------------------------
+
+Test 2: Un ejemplo grande con nlanz=10 sum=30 rep=10000000
+Precalentando secuencialmente
+Semilla inicial para proceso 448 es 130172381
+Casos favorables con 200000 repeticiones para proceso 448=9705
+fav=9705 pbb=0.048525
+Calculando secuencialmente con rep=20000000
+Semilla inicial para proceso 448 es 130172381
+Casos favorables con 20000000 repeticiones para proceso 448=969505
+Tiempo= 1179, fav=969505 pbb=0.048475
+
+-----
+Calculando en paralelo con rep=20000000, intento 1
+Semilla inicial para proceso 457 es 1567568380
+Semilla inicial para proceso 458 es 1089043673
+Semilla inicial para proceso 459 es 1044590252
+Semilla inicial para proceso 460 es 1993404736
+Casos favorables con 5000000 repeticiones para proceso 460=242574
+Casos favorables con 5000000 repeticiones para proceso 458=242405
+Casos favorables con 5000000 repeticiones para proceso 459=242996
+Casos favorables con 5000000 repeticiones para proceso 457=242710
+Tiempo= 368  speedup= 3.2038  fav=970685  pbb=0.048534  delta=0.001217
+Test 2 aprobado: speedup >= 1.5x
+
+Felicitaciones: su tarea funciona
